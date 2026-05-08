@@ -3,7 +3,6 @@ from __future__ import annotations
 from io import BytesIO
 from pathlib import Path
 import sys
-import zipfile
 
 import numpy as np
 from PIL import Image
@@ -16,18 +15,8 @@ from ui.advanced_detection import detect_clouds_advanced, remove_clouds_advanced
 from ui.metrics_utils import calc_metrics
 
 DATASET_ROOT = PROJECT_ROOT.parent / "RICE_DATASET"
-DATASET_ZIP = PROJECT_ROOT.parent / "RICE_DATASET.zip"
 
-# Auto-extract dataset on first run if needed
-if not DATASET_ROOT.exists() and DATASET_ZIP.exists():
-    try:
-        with st.spinner("📦 Extracting dataset... (this runs only once)"):
-            with zipfile.ZipFile(DATASET_ZIP, 'r') as zip_ref:
-                zip_ref.extractall(PROJECT_ROOT.parent)
-    except Exception as e:
-        st.error(f"Failed to extract dataset: {e}")
-
-# Check if dataset exists after extraction attempt
+# Check if dataset exists (should be available after git clone)
 DATASET_AVAILABLE = DATASET_ROOT.exists() and any(DATASET_ROOT.glob("RICE*"))
 
 # Page config
@@ -119,31 +108,6 @@ st.write("Professional satellite imagery analysis with real-time cloud detection
 # Sidebar controls
 with st.sidebar:
     st.header("Dataset Browser")
-    
-    # Check if dataset is available
-    if not DATASET_AVAILABLE:
-        st.warning("⚠️ Dataset not found!")
-        st.info(
-            "The RICE dataset is not available on this deployment. "
-            "This is a demo mode. You can:\n"
-            "1. **Upload your own satellite image** below to test cloud detection\n"
-            "2. Or deploy locally with the dataset included"
-        )
-        st.divider()
-        st.subheader("🖼️ Upload Your Image")
-        uploaded_file = st.file_uploader("Choose a satellite image", type=["png", "jpg", "jpeg", "tif", "tiff"])
-        
-        if uploaded_file:
-            col1, col2 = st.columns(2)
-            with col1:
-                st.subheader("Original Image")
-                img = Image.open(uploaded_file).convert("RGB")
-                st.image(img, use_column_width=True)
-                
-                # Quick detection demo
-                if st.button("🔍 Detect Clouds in Image"):
-                    st.info("Cloud detection demo - model would process here")
-        st.stop()
     
     # Dataset selection
     dataset_split = st.radio("Select Dataset", ["RICE1 (Paired)", "RICE2 (Masks)"], key="split_select")
