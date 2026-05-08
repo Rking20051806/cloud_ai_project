@@ -1,0 +1,7 @@
+{
+  "buildCommand": "pip install -r requirements.txt",
+  "framework": "streamlit",
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}
