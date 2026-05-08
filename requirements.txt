@@ -1,0 +1,14 @@
+torch
+torchvision
+torchaudio
+numpy
+pandas
+pillow
+matplotlib
+scikit-image
+opencv-python
+albumentations
+tqdm
+pyyaml
+streamlit
+captum

@@ -1,0 +1,6 @@
+Place the following screenshots (from the Streamlit UI) here with exact filenames:
+- detection.png            (Cloud Detection tab screenshot)
+- removal.png             (Cloud Removal tab screenshot showing Original and After Removal)
+- visual_comparison.png    (Analysis & Metrics Visual Comparison 3-panel screenshot)
+
+You can generate these by opening the app and taking screenshots, then saving them here before compiling the report.

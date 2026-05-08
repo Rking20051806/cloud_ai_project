@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Inspect RICE dataset",
+      "type": "shell",
+      "command": "python",
+      "args": ["scripts/inspect_dataset.py"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Train segmentation baseline",
+      "type": "shell",
+      "command": "python",
+      "args": ["training/train_segmentation.py"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Streamlit demo",
+      "type": "shell",
+      "command": "streamlit",
+      "args": ["run", "ui/app.py"],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}
