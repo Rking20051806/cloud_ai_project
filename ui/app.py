@@ -3,6 +3,7 @@ from __future__ import annotations
 from io import BytesIO
 from pathlib import Path
 import sys
+import zipfile
 
 import numpy as np
 from PIL import Image
@@ -15,6 +16,13 @@ from ui.advanced_detection import detect_clouds_advanced, remove_clouds_advanced
 from ui.metrics_utils import calc_metrics
 
 DATASET_ROOT = PROJECT_ROOT.parent / "RICE_DATASET"
+DATASET_ZIP = PROJECT_ROOT.parent / "RICE_DATASET.zip"
+
+# Auto-extract dataset on first run if needed
+if not DATASET_ROOT.exists() and DATASET_ZIP.exists():
+    with st.spinner("📦 Extracting dataset... (this runs only once)"):
+        with zipfile.ZipFile(DATASET_ZIP, 'r') as zip_ref:
+            zip_ref.extractall(PROJECT_ROOT.parent)
 
 # Page config
 st.set_page_config(
