@@ -14,7 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from ui.advanced_detection import detect_clouds_advanced, remove_clouds_advanced
 from ui.metrics_utils import calc_metrics
 
-DATASET_ROOT = PROJECT_ROOT.parent / "RICE_DATASET"
+DATASET_ROOT = PROJECT_ROOT / "RICE_DATASET"
 
 # Check if dataset exists (should be available after git clone)
 DATASET_AVAILABLE = DATASET_ROOT.exists() and any(DATASET_ROOT.glob("RICE*"))
